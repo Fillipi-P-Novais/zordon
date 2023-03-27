@@ -17,9 +17,13 @@ class MainController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function calcular(Request $request)
     {
-        //
+        $valor_procedimento = $request->valor;
+
+        dd($valor_procedimento);
+
+        return response()->json(['calculado' => $valor_procedimento]);
     }
 
     /**
@@ -36,15 +40,7 @@ class MainController extends Controller
     public function show(string $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    }    
 
     /**
      * Update the specified resource in storage.

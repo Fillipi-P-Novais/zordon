@@ -19,6 +19,7 @@ Route::get('/', function () {
     return view('main');
 });
 */
- 
+
 Route::get('/', [MainController::class, 'index']);
+Route::post('/calcular', [MainController::class, 'calcular']);
 

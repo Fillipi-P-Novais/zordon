@@ -10,8 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <form class="row mt-5">
-            
+        <form class="row mt-5">            
             <div class="col-md-3">
                 <select id="procedimentos" class="form-select">
                     <option selected>Selecione o procedimento</option>
@@ -31,6 +30,7 @@
             <div class="col-md-3 mb-3">
                 <button type="button" class="btn btn-outline-primary" id="calcular">Calcular</button>                    
             </div>
+            <div class="" id="enviando"></div>
             <hr>
             <div class="col-md-3">
               <label for="" class="form-label">1º Auxiliar</label>
@@ -57,10 +57,29 @@
         
         $('#procedimentos').change(function() {           
            $('#codigo_tuss').val(123456789);
-           $('#valor_procedimento').val('R$10.000,00');
+           $('#valor_procedimento').val(10000);
         });
         
-        $('#calcular');
+        $('#calcular').click(function(){
+
+            let valor= $('#valor_procedimento').val();
+
+            $.ajax({
+                type : 'POST',           
+                url : `api/calcular=${valor}`,
+                beforeSend : function(){
+                    $('#enviando').html("Calculando...");
+                }
+            }).done(function(msg){
+                $('#enviando').empty();
+                console.log('Done');
+            })
+            .fail(function(){
+                $('#enviando').empty();
+                console.log('Fail');
+            });
+        });
+
     })
 </script>
 </html>
