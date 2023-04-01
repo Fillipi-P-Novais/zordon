@@ -6,55 +6,66 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('main');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function calcular(Request $request)
     {
         $valor_procedimento = $request->valor;
 
-        dd($valor_procedimento);
+        $aux1 =  $valor_procedimento * 30 / 100;
+        $auxiliar1 = number_format($aux1, 2, '.', '');
 
-        return response()->json(['calculado' => $valor_procedimento]);
-    }
+        $aux2 =  $valor_procedimento * 20 / 100;
+        $auxiliar2 = number_format($aux2, 2, '.', '');
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $instr =  $valor_procedimento * 10 / 100;
+        $instrumentador = number_format($instr, 2, '.', '');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }    
+        $anest =  $valor_procedimento * 40 / 100;
+        $anestesista = number_format($anest, 2, '.', '');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $conc = $valor_procedimento * 5 / 100;
+        $concierge = number_format($conc, 2, '.', '');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $total1 = $valor_procedimento + $auxiliar1 +  $auxiliar2 + $instrumentador + $anestesista + $concierge;
+        $total_sem_acrescimo = number_format($total1, 2, '.', '');
+
+
+        $aux1_com_acrescimo = $aux1 * 30 / 100;
+        $auxiliar1_com_acrescimo = number_format($aux1_com_acrescimo, 2, '.', '');
+
+        $aux2_com_acrescimo = $aux2 * 30 / 100;
+        $auxiliar2_com_acrescimo = number_format($aux2_com_acrescimo, 2, '.', '');
+
+        $instr_com_acrescimo = $instrumentador * 30 / 100;
+        $instrumentador_com_acrescimo = number_format($instr_com_acrescimo, 2, '.', '');
+
+        $anest_com_acrescimo = $anestesista * 30 / 100;
+        $anestesista_com_acrescimo = number_format($anest_com_acrescimo, 2, '.', '');
+
+        $conc_com_acrescimo = $concierge * 30 / 100;
+        $concierge_com_acrescimo = number_format($conc_com_acrescimo, 2, '.', '');
+
+        $total2 = $total_sem_acrescimo + $auxiliar1_com_acrescimo + $auxiliar2_com_acrescimo + $instrumentador_com_acrescimo +  $anestesista_com_acrescimo + $concierge_com_acrescimo;
+        $total_com_acrescimo = number_format($total2, 2, '.', '');
+        
+        $dados = ([
+            ['auxiliar1' => $auxiliar1],
+            ['auxiliar2' => $auxiliar2],
+            ['instrumentador' => $instrumentador],
+            ['anestesista' => $anestesista],
+            ['concierge' => $concierge],
+            ['total_sem_acrescimo' => $total_sem_acrescimo],
+            ['auxiliar1_com_acrescimo' => $auxiliar1_com_acrescimo],
+            ['auxiliar2_com_acrescimo' => $auxiliar2_com_acrescimo],
+            ['instrumentador_com_acrescimo' => $instrumentador_com_acrescimo],
+            ['anestesista_com_acrescimo' => $anestesista_com_acrescimo],
+            ['concierge_com_acrescimo' => $concierge_com_acrescimo],
+            ['total_com_acrescimo' => $total_com_acrescimo],
+        ]);
+        return response()->json(['dados' => $dados]);
     }
 }
