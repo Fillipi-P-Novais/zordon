@@ -15,17 +15,21 @@
         .centralizacao {
             text-align-last: center;
         }
+
+        .grid {
+            display: grid;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <form class="row mt-5">
-            <div class="row centralizacao mb-3">
-                <div class="col-md-4">                                        
-                    <input type="text" class="form-control" id="valor_procedimento" placeholder="Valor do procedimento" required>             
+            <div class="row centralizacao mb-3">                
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="valor_procedimento" placeholder="Valor do procedimento">               
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" id="porcentagem_calculo" placeholder="% para calcular" required>               
+                    <input type="text" class="form-control" id="porcentagem_calculo" placeholder="% para calcular">               
                 </div>
                 <div class="col-md-4 d-flex justify-content-around">
                     <button type="button" class="btn btn-outline-primary" id="calcular">Calcular</button>
@@ -34,57 +38,53 @@
                 </div>
                 <div class="" id="enviando"></div>
             </div>
-            <hr>
-            <div class="text-center">
-                <h3>Valores sem acréscimos</h3>
+            <div class="row centralizacao mb-3" id="agrupamento_procedimentos">
             </div>
-            <div class="row centralizacao mb-3 justify-content-center" id="secao_sem_acrescimo">                
-                <div class="col-md-2">
+            <hr>
+            <section class="row grid centralizacao mb-3 col-md-6 justify-content-center" id="secao_sem_acrescimo">                
+                <div class="col">
                     <label for="" class="form-label">1º Auxiliar</label>
                     <input type="text" class="form-control" id="parcial_auxiliar_1">
-                </div>
-                <div class="col-md-2">
+                </div>                               
+                <div class="col">
                     <label for="" class="form-label">Anestesista</label>
                     <input type="text" class="form-control" id="parcial_anestesista">
                 </div>
-                <div class="col-md-2">
+                <div class="col">
                     <label for="" class="form-label">Instrumentador</label>
                     <input type="text" class="form-control" id="parcial_instrumentador">
                 </div>
-                <div class="col-md-2">
+                <div class="col">
                     <label for="" class="form-label">Concierge</label>
                     <input type="text" class="form-control" id="parcial_concierge">
                 </div>
-                <div class="col-md-2">
+                <div class="col">
                     <label for="" class="form-label">Total</label>
                     <input type="text" class="form-control" id="parcial_total_sem_acrescimo">
                 </div>
-            </div>
-            <div class="text-center">
-                <h3>Valores com +30%</h3>
-            </div>    
-            <div class="row centralizacao mb-3 justify-content-center" id="secao_com_acrescimo">
-                <div class="col-md-2">
+            </section>
+            <section class="grid centralizacao mb-3 col-md-6 justify-content-center" id="secao_com_acrescimo">                
+                <div class="col">
                     <label for="" class="form-label">1º Auxiliar</label>
                     <input type="text" class="form-control" id="auxiliar_1_com_acrescimo">
-                </div>                
-                <div class="col-md-2">
+                </div>
+                <div class="col">
                     <label for="" class="form-label">Anestesista</label>
                     <input type="text" class="form-control" id="anestesista_com_acrescimo">
                 </div>
-                <div class="col-md-2">
+                <div class="col">
                     <label for="" class="form-label">Instrumentador</label>
                     <input type="text" class="form-control" id="instrumentador_com_acrescimo">
                 </div>
-                <div class="col-md-2">
-                    <label for="" class="form-label">% Concierge</label>
+                <div class="col">
+                    <label for="" class="form-label">Concierge</label>
                     <input type="text" class="form-control" id="concierge_com_acrescimo">
                 </div>
-                <div class="col-md-2">
+                <div class="col">
                     <label for="" class="form-label">Total</label>
                     <input type="text" class="form-control" id="total_com_acrescimo">
                 </div>                
-            </div>
+            </section>
             <hr>            
         </form>  
     </div>
@@ -92,7 +92,7 @@
 <script> 
     $(document).ready(function() {        
         $('#procedimentos').change(function() {           
-           $('#codigo_tuss').val(123456789);
+           $('#codigo_tuss').val(163456789);
            $('#valor_procedimento').val(10000);
         });
 
@@ -132,7 +132,7 @@
                 $('#anestesista_com_acrescimo').val(instrumentador_com_acrescimo);
                 $('#instrumentador_com_acrescimo').val(anestesista_com_acrescimo);
                 $('#concierge_com_acrescimo').val(concierge_com_acrescimo);
-                $('#total_com_acrescimo').val(total_com_acrescimo);
+                $('#total_com_acrescimo').val(total_com_acrescimo); 
             })
             .fail(function(){
                 $('#enviando').empty();
@@ -164,16 +164,15 @@
             `);
         });
 
-        $('#add_auxiliar').click(function(){
-            $('.aux2').remove();
+        $('#add_auxiliar').click(function(){                       
             $('#secao_sem_acrescimo').prepend(`
-                <div class="col-md-2 aux2">
+                <div class="col aux2">
                     <label for="" class="form-label">2º Auxiliar</label>
                     <input type="text" class="form-control" id="parcial_auxiliar_2">                   
                 </div>
             `);
             $('#secao_com_acrescimo').prepend(`
-                <div class="col-md-2 aux2">
+                <div class="col aux2">
                     <label for="" class="form-label">2º Auxiliar</label>
                     <input type="text" class="form-control" id="auxiliar_2_com_acrescimo">                   
                 </div>
