@@ -118,8 +118,8 @@
                 let concierge = campos[3].concierge;
                 let total_sem_acrescimo = campos[4].total_sem_acrescimo; 
                 let auxiliar_1_com_acrescimo = campos[5].auxiliar1_com_acrescimo;
-                let instrumentador_com_acrescimo = campos[6].instrumentador_com_acrescimo;
                 let anestesista_com_acrescimo = campos[7].anestesista_com_acrescimo;
+                let instrumentador_com_acrescimo = campos[6].instrumentador_com_acrescimo;
                 let concierge_com_acrescimo = campos[8].concierge_com_acrescimo;
                 let total_com_acrescimo = campos[9].total_com_acrescimo;
                 
@@ -129,8 +129,8 @@
                 $('#parcial_concierge').val(concierge);
                 $('#parcial_total_sem_acrescimo').val(total_sem_acrescimo);                
                 $('#auxiliar_1_com_acrescimo').val(auxiliar_1_com_acrescimo);
-                $('#anestesista_com_acrescimo').val(instrumentador_com_acrescimo);
-                $('#instrumentador_com_acrescimo').val(anestesista_com_acrescimo);
+                $('#anestesista_com_acrescimo').val(anestesista_com_acrescimo);
+                $('#instrumentador_com_acrescimo').val(instrumentador_com_acrescimo);
                 $('#concierge_com_acrescimo').val(concierge_com_acrescimo);
                 $('#total_com_acrescimo').val(total_com_acrescimo);
             })

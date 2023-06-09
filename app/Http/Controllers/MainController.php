@@ -16,6 +16,11 @@ class MainController extends Controller
         return view('main_layout_2');
     }
 
+    public function procedimentos(Request $request)
+    {
+        
+    }
+
     public function calcular(Request $request)
     {
         $valor_procedimento = $request->valor;
