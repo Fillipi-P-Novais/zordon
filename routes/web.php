@@ -15,4 +15,5 @@ use App\Http\Controllers\MainController;
 */
 
 Route::get('/', [MainController::class, 'index']);
+Route::get('/login', [MainController::class, 'login']);
 Route::get('/layout2', [MainController::class, 'layoutDois']);

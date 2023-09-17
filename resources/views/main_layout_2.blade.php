@@ -24,17 +24,27 @@
 <body>
     <div class="container">
         <form class="row mt-5">
-            <div class="row centralizacao mb-3">                
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="valor_procedimento" placeholder="Valor do procedimento">               
+            <div class="col-md-2 d-flex mb-2" >
+                <input type="text" class="form-control" id="buscar_procedimento" placeholder="Código TUSS">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-primary" id="buscarTuss">Buscar</button>
+            </div>
+            <div class="row centralizacao mb-3">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="tuss">
                 </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="porcentagem_calculo" placeholder="% para calcular">               
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="descricao">
                 </div>
-                <div class="col-md-4 d-flex justify-content-around">
-                    <button type="button" class="btn btn-outline-primary" id="calcular">Calcular</button>
-                    <button type="button" class="btn btn-outline-warning" id="add_auxiliar">Add Auxiliar</button>
-                    <button type="button" class="btn btn-outline-danger" id="deletar_auxiliar">Del Auxiliar</button>                    
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="valor">
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-outline-warning" id="incluir">Incluir</button>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-outline-danger" id="remover">Remover</button>
                 </div>
                 <div class="" id="enviando"></div>
             </div>
@@ -91,9 +101,29 @@
 </body>
 <script> 
     $(document).ready(function() {        
-        $('#procedimentos').change(function() {           
-           $('#codigo_tuss').val(163456789);
-           $('#valor_procedimento').val(10000);
+        $('#buscarTuss').click(function() {           
+          let tuss = $('#buscar_procedimento').val();
+
+           $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type : 'GET',           
+                url : `api/buscarTuss?tuss=${tuss}`,
+                beforeSend : function(){
+                    $('#enviando').html("Calculando...");
+                }
+            }).done(function(retorno){
+                let dados = retorno;
+                let tuss_code = dados[0].codigo_tuss;
+                let descricao = dados[0].descricao_procedimento;
+                let valor = dados[0].valor_procedimento;
+
+                $('#tuss').val(tuss_code);
+                $('#descricao').val(descricao);
+                $('#valor').val(valor);
+                console.log(dados, tuss_code);
+            })
         });
 
         $('#calcular').click(function(){

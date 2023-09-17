@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 class MainController extends Controller
 {
     public function index()
@@ -11,14 +13,28 @@ class MainController extends Controller
         return view('main');
     }
 
+    public function login()
+    {
+        return view('login');
+    }
+
     public function layoutDois()
     {
         return view('main_layout_2');
     }
 
-    public function procedimentos(Request $request)
+    public function buscar_procedimentos(Request $request)
     {
+        $tuss = $request->tuss;
         
+        $registros = DB::connection('mysql')
+            ->table('procedimentos')
+            ->select('*')
+            ->where('codigo_tuss', $tuss)
+            ->get();
+
+        return $registros;
+        //return response()->json($tuss);
     }
 
     public function calcular(Request $request)

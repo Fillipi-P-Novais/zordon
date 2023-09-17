@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/calcular', [MainController::class, 'calcular']);
+Route::get('/buscarTuss', [MainController::class, 'buscar_procedimentos']);
